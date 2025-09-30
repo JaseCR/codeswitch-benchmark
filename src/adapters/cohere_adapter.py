@@ -1,17 +1,36 @@
-# Cohere API Adapter
-# Wrapper for calling Cohere models to analyze code-switching behavior
+import os, cohere
+from dotenv import load_dotenv
+load_dotenv()  # load .env if running standalone
 
-import cohere
-from typing import List, Dict, Any
+_COHERE_KEY = os.getenv("COHERE_API_KEY")
+_client = cohere.Client(_COHERE_KEY)
 
-class CohereAdapter:
-    """Adapter for Cohere models"""
-    
-    def __init__(self, api_key: str, model: str = "command"):
-        self.client = cohere.Client(api_key)
-        self.model = model
-    
-    def generate_response(self, prompt: str) -> str:
-        """Generate response from Cohere model"""
-        # Placeholder implementation
-        pass
+def query_cohere(prompt: str, model: str = "command-r-plus-08-2024", temperature: float = 0.3, max_tokens: int = 200) -> str:
+    """
+    Return ONE sentence paraphrase/continuation in the SAME style. No lists or explanations.
+    """
+    try:
+        # Use the new Chat API
+        resp = _client.chat(
+            model=model,
+            message=prompt,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            stop_sequences=["\n\n"]
+        )
+        return resp.text.strip()
+    except Exception as e:
+        # Fallback to other models if command-r-plus-08-2024 fails
+        if model == "command-r-plus-08-2024":
+            try:
+                resp = _client.chat(
+                    model="command-r-08-2024",
+                    message=prompt,
+                    max_tokens=max_tokens,
+                    temperature=temperature,
+                    stop_sequences=["\n\n"]
+                )
+                return resp.text.strip()
+            except:
+                pass
+        raise e
