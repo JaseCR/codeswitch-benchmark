@@ -24,7 +24,7 @@ def initialize_adapter(model_name: str):
     
     if model_name == "openai":
         api_key = os.getenv("OPENAI_API_KEY")
-        return OpenAIAdapter(api_key=api_key, model="gpt-4o-mini", temperature=0.5, max_tokens=500)
+        return OpenAIAdapter(api_key=api_key, model="gpt-4o", temperature=0.5, max_tokens=1000)
     elif model_name == "gemini":
         api_key = os.getenv("GEMINI_API_KEY")
         return GeminiAdapter(api_key=api_key, model="gemini-2.5-flash", temperature=0.5, max_tokens=500)
