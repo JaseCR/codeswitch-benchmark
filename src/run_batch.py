@@ -25,8 +25,8 @@ def initialize_adapter(model_name: str):
     
     if model_name == "openai":
         api_key = os.getenv("OPENAI_API_KEY")
-        # Try different models based on quota availability
-        models_to_try = ["gpt-3.5-turbo", "gpt-4o-mini", "gpt-4o"]
+        # Try Pro models first (you have OpenAI Pro access)
+        models_to_try = ["gpt-4o", "gpt-4-turbo", "gpt-4o-mini", "gpt-3.5-turbo"]
         
         for model in models_to_try:
             try:
@@ -37,8 +37,10 @@ def initialize_adapter(model_name: str):
                     messages=[{"role": "user", "content": "test"}],
                     max_tokens=1
                 )
-                print(f"✅ Using {model} for OpenAI")
-                return OpenAIAdapter(api_key=api_key, model=model, temperature=0.5, max_tokens=500)
+                print(f"✅ Using {model} for OpenAI Pro")
+                # Use higher limits for Pro models
+                max_tokens = 1000 if "gpt-4" in model else 500
+                return OpenAIAdapter(api_key=api_key, model=model, temperature=0.5, max_tokens=max_tokens)
             except Exception as e:
                 print(f"❌ {model} failed: {e}")
                 continue
