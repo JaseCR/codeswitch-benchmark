@@ -4,6 +4,7 @@
 import argparse
 import pandas as pd
 import os
+import openai
 from typing import List, Dict
 from pathlib import Path
 from tqdm import tqdm
@@ -24,7 +25,25 @@ def initialize_adapter(model_name: str):
     
     if model_name == "openai":
         api_key = os.getenv("OPENAI_API_KEY")
-        return OpenAIAdapter(api_key=api_key, model="gpt-4o", temperature=0.5, max_tokens=1000)
+        # Try different models based on quota availability
+        models_to_try = ["gpt-3.5-turbo", "gpt-4o-mini", "gpt-4o"]
+        
+        for model in models_to_try:
+            try:
+                # Test if model works
+                test_client = openai.OpenAI(api_key=api_key)
+                test_client.chat.completions.create(
+                    model=model,
+                    messages=[{"role": "user", "content": "test"}],
+                    max_tokens=1
+                )
+                print(f"✅ Using {model} for OpenAI")
+                return OpenAIAdapter(api_key=api_key, model=model, temperature=0.5, max_tokens=500)
+            except Exception as e:
+                print(f"❌ {model} failed: {e}")
+                continue
+        
+        raise Exception("No working OpenAI models found. Check your quota and billing.")
     elif model_name == "gemini":
         api_key = os.getenv("GEMINI_API_KEY")
         return GeminiAdapter(api_key=api_key, model="gemini-2.5-flash", temperature=0.5, max_tokens=500)
