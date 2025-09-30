@@ -51,7 +51,7 @@ def initialize_adapter(model_name: str):
         return GeminiAdapter(api_key=api_key, model="gemini-2.5-flash", temperature=0.5, max_tokens=500)
     elif model_name == "anthropic":
         api_key = os.getenv("ANTHROPIC_API_KEY")
-        return AnthropicAdapter(api_key=api_key, model="claude-3-5-sonnet-20241022", temperature=0.5, max_tokens=500)
+        return AnthropicAdapter(api_key=api_key, model="claude-3-5-sonnet-20241022", temperature=0.5, max_tokens=1000)
     elif model_name == "cohere":
         api_key = os.getenv("COHERE_API_KEY")
         return CohereAdapter(api_key=api_key, model="command", temperature=0.5, max_tokens=500)
@@ -124,7 +124,7 @@ def main():
     parser = argparse.ArgumentParser(description="Run code-switching batch experiment")
     parser.add_argument("--stimuli", default="../data/raw/stimuli.csv", help="Path to stimuli CSV file")
     parser.add_argument("--output", default="../data/raw", help="Output directory")
-    parser.add_argument("--models", nargs="+", default=["openai", "gemini"],
+    parser.add_argument("--models", nargs="+", default=["anthropic", "gemini"],
                        help="Models to test")
     
     args = parser.parse_args()
