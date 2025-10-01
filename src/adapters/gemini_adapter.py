@@ -85,3 +85,37 @@ class GeminiAdapter:
             generation_config=self.generation_config,
             safety_settings=self.safety_settings
         )
+
+
+# Simple function interface for compatibility with other adapters
+def query_gemini(prompt: str, model: str = "gemini-2.5-flash", temperature: float = 0.3, max_tokens: int = 200):
+    """
+    Simple function interface for Gemini API calls
+    Compatible with other adapter functions
+    """
+    import os
+    from dotenv import load_dotenv
+    
+    # Load environment variables
+    load_dotenv()
+    
+    # Get API key
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        return "ERROR: Gemini API key not found in environment variables"
+    
+    try:
+        # Create adapter instance
+        adapter = GeminiAdapter(
+            api_key=api_key,
+            model=model,
+            temperature=temperature,
+            max_tokens=max_tokens
+        )
+        
+        # Generate response
+        response = adapter.generate_response(prompt)
+        return response if response else "ERROR: No response from Gemini"
+        
+    except Exception as e:
+        return f"ERROR: {str(e)}"

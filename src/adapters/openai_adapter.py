@@ -111,3 +111,37 @@ class OpenAIAdapter:
                 else:
                     print(f"All {max_retries} attempts failed")
                     return None
+
+
+# Simple function interface for compatibility with other adapters
+def query_openai(prompt: str, model: str = "gpt-4o-mini", temperature: float = 0.3, max_tokens: int = 200) -> str:
+    """
+    Simple function interface for OpenAI API calls
+    Compatible with other adapter functions
+    """
+    import os
+    from dotenv import load_dotenv
+    
+    # Load environment variables
+    load_dotenv()
+    
+    # Get API key
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
+        return "ERROR: OpenAI API key not found in environment variables"
+    
+    try:
+        # Create adapter instance
+        adapter = OpenAIAdapter(
+            api_key=api_key,
+            model=model,
+            temperature=temperature,
+            max_tokens=max_tokens
+        )
+        
+        # Generate response
+        response = adapter.generate_with_retry(prompt, max_retries=3)
+        return response if response else "ERROR: No response from OpenAI"
+        
+    except Exception as e:
+        return f"ERROR: {str(e)}"

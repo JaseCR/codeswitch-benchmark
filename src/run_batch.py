@@ -37,12 +37,12 @@ def initialize_adapter(model_name: str):
                     messages=[{"role": "user", "content": "test"}],
                     max_tokens=1
                 )
-                print(f"✅ Using {model} for OpenAI Pro")
+                print(f" Using {model} for OpenAI Pro")
                 # Use higher limits for Pro models
                 max_tokens = 1000 if "gpt-4" in model else 500
                 return OpenAIAdapter(api_key=api_key, model=model, temperature=0.5, max_tokens=max_tokens)
             except Exception as e:
-                print(f"❌ {model} failed: {e}")
+                print(f" {model} failed: {e}")
                 continue
         
         raise Exception("No working OpenAI models found. Check your quota and billing.")
@@ -111,10 +111,10 @@ def run_batch_experiment(stimuli_file: str, output_dir: str, models: List[str]) 
             results_df = pd.DataFrame(responses)
             output_file = os.path.join(output_dir, f"{model_name}_responses.csv")
             results_df.to_csv(output_file, index=False)
-            print(f"✅ Saved {len(responses)} responses to {output_file}")
+            print(f" Saved {len(responses)} responses to {output_file}")
             
         except Exception as e:
-            print(f"❌ Error processing {model_name}: {e}")
+            print(f" Error processing {model_name}: {e}")
             continue
     
     print(f"\n🎉 Batch experiment completed! Results saved to {output_dir}")

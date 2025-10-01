@@ -31,6 +31,7 @@ def query_cohere(prompt: str, model: str = "command-r-plus-08-2024", temperature
                     stop_sequences=["\n\n"]
                 )
                 return resp.text.strip()
-            except:
+            except Exception as inner_e:
+                print(f"Retry attempt {attempt + 1} failed: {inner_e}")
                 pass
         raise e

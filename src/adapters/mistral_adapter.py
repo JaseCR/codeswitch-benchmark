@@ -30,6 +30,7 @@ def query_mistral(prompt: str, model: str = "mistral-large-latest", temperature:
                     temperature=temperature
                 )
                 return response.choices[0].message.content.strip()
-            except:
+            except Exception as inner_e:
+                print(f"Retry attempt {attempt + 1} failed: {inner_e}")
                 pass
         raise e

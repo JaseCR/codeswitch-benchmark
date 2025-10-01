@@ -62,16 +62,16 @@ class BackgroundAgent:
             
             if result.returncode == 0:
                 if description:
-                    print(f"✅ {description} - Success")
+                    print(f" {description} - Success")
                 return True
             else:
                 if description:
-                    print(f"❌ {description} - Failed: {result.stderr}")
+                    print(f" {description} - Failed: {result.stderr}")
                 return False
                 
         except Exception as e:
             if description:
-                print(f"❌ {description} - Error: {e}")
+                print(f" {description} - Error: {e}")
             return False
     
     def install_package(self, package_name: str) -> bool:
@@ -93,12 +93,12 @@ class BackgroundAgent:
                 self.installed_packages.add(package_name)
                 return True
         
-        print(f"❌ Failed to install {package_name}")
+        print(f" Failed to install {package_name}")
         return False
     
     def check_and_install_packages(self) -> bool:
         """Check for missing packages and install them automatically"""
-        print("🔍 Checking required packages...")
+        print(" Checking required packages...")
         
         missing_packages = []
         
@@ -111,9 +111,9 @@ class BackgroundAgent:
                     import google.generativeai
                 else:
                     importlib.import_module(import_name)
-                print(f"✅ {import_name} - Available")
+                print(f" {import_name} - Available")
             except ImportError:
-                print(f"❌ {import_name} - Missing")
+                print(f" {import_name} - Missing")
                 missing_packages.append(package_name)
         
         if missing_packages:
@@ -122,13 +122,13 @@ class BackgroundAgent:
                 if not self.install_package(package):
                     return False
         else:
-            print("✅ All required packages are available!")
+            print(" All required packages are available!")
         
         return True
     
     def setup_environment(self) -> bool:
         """Set up the Python environment"""
-        print("🚀 Background Agent - Setting up environment...")
+        print(" Background Agent - Setting up environment...")
         print("=" * 60)
         
         # Change to project root
@@ -141,20 +141,20 @@ class BackgroundAgent:
         src_path = self.project_root / "src"
         if src_path.exists() and str(src_path) not in sys.path:
             sys.path.insert(0, str(src_path))
-            print(f"✅ Added {src_path} to Python path")
+            print(f" Added {src_path} to Python path")
         
         # Check and install packages
         if not self.check_and_install_packages():
-            print("❌ Package installation failed")
+            print(" Package installation failed")
             return False
         
         # Load environment variables
         try:
             from dotenv import load_dotenv
             load_dotenv()
-            print("✅ Environment variables loaded")
+            print(" Environment variables loaded")
         except ImportError:
-            print("⚠️  python-dotenv not available, skipping .env loading")
+            print("  python-dotenv not available, skipping .env loading")
         
         print("\n🎉 Environment setup complete!")
         return True
@@ -173,7 +173,7 @@ class BackgroundAgent:
             print("🔧 Fixing 'pip not defined' issue...")
             # This usually means we need to use subprocess instead
             issues_fixed['pip_import'] = False
-            print("✅ Will use subprocess for pip commands")
+            print(" Will use subprocess for pip commands")
         
         # Issue 2: Module not found errors
         if self.check_and_install_packages():
@@ -199,15 +199,15 @@ class BackgroundAgent:
         
         # Setup environment
         if not self.setup_environment():
-            print("❌ Environment setup failed")
+            print(" Environment setup failed")
             return False
         
         # Fix common issues
         issues = self.fix_common_issues()
         
-        print("\n📊 Issues Fixed:")
+        print("\n Issues Fixed:")
         for issue, fixed in issues.items():
-            status = "✅ Fixed" if fixed else "⚠️  Not Fixed"
+            status = " Fixed" if fixed else "  Not Fixed"
             print(f"  {issue}: {status}")
         
         print("\n🎉 Background Agent setup complete!")
@@ -240,5 +240,5 @@ else:
         agent = BackgroundAgent()
         agent.setup_environment()
     except Exception as e:
-        print(f"⚠️  Background agent setup failed: {e}")
+        print(f"  Background agent setup failed: {e}")
         print("You can manually run: from background_agent import run_background_agent; run_background_agent()")

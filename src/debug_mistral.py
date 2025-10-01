@@ -44,16 +44,16 @@ class MistralDebugAgent:
     
     def setup_environment(self):
         """Set up environment variables and working directory"""
-        print("🔍 Mistral Debug Agent Starting...")
+        print(" Mistral Debug Agent Starting...")
         print("=" * 50)
         
         # Find project root
         try:
             self.find_project_root()
-            print(f"✅ Found project root: {self.project_root}")
-            print(f"✅ Found .env file: {self.env_file_path}")
+            print(f" Found project root: {self.project_root}")
+            print(f" Found .env file: {self.env_file_path}")
         except FileNotFoundError as e:
-            print(f"❌ {e}")
+            print(f" {e}")
             return False
             
         # Change to project root if needed
@@ -63,24 +63,24 @@ class MistralDebugAgent:
             
         # Load environment variables
         load_dotenv()
-        print("✅ Environment variables loaded")
+        print(" Environment variables loaded")
         
         # Get API key
         self.api_key = os.getenv("MISTRAL_API_KEY")
         if not self.api_key:
-            print("❌ MISTRAL_API_KEY not found in environment")
-            print("💡 Please add MISTRAL_API_KEY=your_key_here to your .env file")
+            print(" MISTRAL_API_KEY not found in environment")
+            print(" Please add MISTRAL_API_KEY=your_key_here to your .env file")
             return False
             
-        print(f"✅ API key found (prefix: {self.api_key[:10]})")
-        print(f"✅ API key length: {len(self.api_key)} characters")
+        print(f" API key found (prefix: {self.api_key[:10]})")
+        print(f" API key length: {len(self.api_key)} characters")
         
         # Initialize Mistral client
         try:
             self.client = Mistral(api_key=self.api_key)
-            print("✅ Mistral client initialized")
+            print(" Mistral client initialized")
         except Exception as e:
-            print(f"❌ Failed to initialize Mistral client: {e}")
+            print(f" Failed to initialize Mistral client: {e}")
             return False
             
         return True
@@ -105,16 +105,16 @@ class MistralDebugAgent:
                     max_tokens=10
                 )
                 result = response.choices[0].message.content.strip()
-                print(f"✅ {model} works: {result}")
+                print(f" {model} works: {result}")
                 return True
             except Exception as e:
                 error_msg = str(e)
                 if "401" in error_msg or "403" in error_msg:
-                    print(f"❌ {model}: Authentication failed (invalid API key)")
+                    print(f" {model}: Authentication failed (invalid API key)")
                 elif "429" in error_msg:
-                    print(f"❌ {model}: Rate limit exceeded")
+                    print(f" {model}: Rate limit exceeded")
                 else:
-                    print(f"❌ {model}: {error_msg[:100]}")
+                    print(f" {model}: {error_msg[:100]}")
                     
         return False
     
@@ -129,7 +129,7 @@ class MistralDebugAgent:
             
         # Test API connection
         if not self.test_api_connection():
-            print("\n❌ API connection failed. Possible issues:")
+            print("\n API connection failed. Possible issues:")
             print("   1. Invalid or expired API key")
             print("   2. Billing/account issues")
             print("   3. Rate limits exceeded")
@@ -141,7 +141,7 @@ class MistralDebugAgent:
             print("   4. Try regenerating your API key")
             return False
             
-        print("\n✅ All tests passed! Mistral API is working correctly.")
+        print("\n All tests passed! Mistral API is working correctly.")
         return True
     
     def fix_notebook_paths(self):
@@ -154,18 +154,18 @@ class MistralDebugAgent:
         if src_path.exists():
             if str(src_path) not in sys.path:
                 sys.path.insert(0, str(src_path))
-                print(f"✅ Added {src_path} to Python path")
+                print(f" Added {src_path} to Python path")
             else:
-                print(f"✅ {src_path} already in Python path")
+                print(f" {src_path} already in Python path")
         else:
-            print(f"❌ Source directory not found: {src_path}")
+            print(f" Source directory not found: {src_path}")
             return False
             
         return True
     
     def run_full_diagnosis(self):
         """Run complete diagnosis and fix issues"""
-        print("🚀 Mistral Debug Agent - Full Diagnosis")
+        print(" Mistral Debug Agent - Full Diagnosis")
         print("=" * 60)
         
         # Run diagnosis
