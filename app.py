@@ -30,6 +30,32 @@ from adapters.cohere_adapter import query_cohere
 app = Flask(__name__)
 app.secret_key = 'code-switching-benchmark-2024'
 
+# Data persistence
+RESULTS_FILE = 'data/aggregated_results.json'
+
+def load_aggregated_results():
+    """Load aggregated results from file"""
+    if os.path.exists(RESULTS_FILE):
+        try:
+            with open(RESULTS_FILE, 'r') as f:
+                return json.load(f)
+        except:
+            return []
+    return []
+
+def save_aggregated_results(results):
+    """Save aggregated results to file"""
+    os.makedirs(os.path.dirname(RESULTS_FILE), exist_ok=True)
+    with open(RESULTS_FILE, 'w') as f:
+        json.dump(results, f, indent=2)
+
+def add_to_aggregated_results(new_results):
+    """Add new test results to aggregated data"""
+    aggregated = load_aggregated_results()
+    aggregated.extend(new_results)
+    save_aggregated_results(aggregated)
+    return aggregated
+
 # Configure matplotlib for web
 plt.style.use('seaborn-v0_8-colorblind')
 sns.set_palette("husl")
@@ -150,8 +176,25 @@ def test_page():
 
 @app.route('/results')
 def results_page():
-    """Results and analysis page"""
-    return render_template('results.html')
+    """Results and analysis page showing aggregated data"""
+    aggregated_results = load_aggregated_results()
+    
+    if not aggregated_results:
+        return render_template('results.html', 
+                             aggregated_results=[],
+                             summary={},
+                             charts={},
+                             message="No test results found. Run some tests first!")
+    
+    # Generate summary and visualizations for aggregated data
+    summary = generate_summary(aggregated_results)
+    charts = create_visualizations(aggregated_results)
+    
+    return render_template('results.html',
+                         aggregated_results=aggregated_results,
+                         summary=summary,
+                         charts=charts,
+                         message=f"Showing results from {len(aggregated_results)} total test runs")
 
 @app.route('/api/test', methods=['POST'])
 def api_test():
@@ -172,9 +215,12 @@ def api_test():
     # Run tests
     results = tester.run_comprehensive_test(api_keys)
     
+    # Add results to aggregated data (for /results page)
+    add_to_aggregated_results(results)
+    
     return jsonify({
         "success": True,
-        "results": results,
+        "results": results,  # Current test results only
         "summary": generate_summary(results)
     })
 

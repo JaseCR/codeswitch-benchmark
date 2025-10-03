@@ -8,8 +8,11 @@
         <div class="col-12">
             <h1 class="text-center mb-5">
                 <i class="fas fa-chart-bar me-3"></i>
-                Analysis Results
+                Aggregated Results Dashboard
             </h1>
+            <p class="text-center text-muted mb-4">
+                View comprehensive results from all test runs. Data is automatically saved and accumulates over time.
+            </p>
         </div>
     </div>
 
@@ -20,8 +23,9 @@
                 <div class="card-header bg-primary text-white">
                     <h4 class="mb-0">
                         <i class="fas fa-analytics me-2"></i>
-                        Benchmark Results Overview
+                        Aggregated Benchmark Results
                     </h4>
+                    <small class="text-light">Results from all test runs - data persists across sessions</small>
                 </div>
                 <div class="card-body">
                     <div class="row" id="overviewStats">
@@ -148,39 +152,50 @@
 
 {% block extra_scripts %}
 <script>
-// Load sample data for demonstration
+// Server-side data from Flask
+const serverData = {
+    aggregated_results: {{ aggregated_results | tojson }},
+    summary: {{ summary | tojson }},
+    charts: {{ charts | tojson }},
+    message: {{ message | tojson }}
+};
+
+// Load aggregated data from server
 document.addEventListener('DOMContentLoaded', function() {
-    loadSampleResults();
+    if (serverData.aggregated_results && serverData.aggregated_results.length > 0) {
+        loadAggregatedResults();
+    } else {
+        showMessage();
+    }
 });
 
-function loadSampleResults() {
-    // Sample data for demonstration
-    const sampleData = {
-        summary: {
-            total_tests: 12,
-            successful_tests: 11,
-            models_tested: 3,
-            varieties_tested: 4,
-            average_retention_rate: 0.68
-        },
-        model_performance: {
-            gemini: 0.75,
-            mistral: 0.68,
-            cohere: 0.61
-        },
-        variety_difficulty: {
-            AAVE: 0.72,
-            Spanglish: 0.58,
-            BrEng: 0.78,
-            StdEng: 0.85
-        }
-    };
+function loadAggregatedResults() {
+    displayOverviewStats(serverData.summary);
+    displayModelComparison(serverData.summary.model_performance || {});
+    displayVarietyAnalysis(serverData.summary.variety_difficulty || {});
+    displayKeyInsights(serverData.summary);
     
-    displayOverviewStats(sampleData.summary);
-    displayModelComparison(sampleData.model_performance);
-    displayVarietyAnalysis(sampleData.variety_difficulty);
-    displayKeyInsights(sampleData);
-    generateSampleCharts();
+    // Load server-generated charts
+    if (serverData.charts && Object.keys(serverData.charts).length > 0) {
+        loadServerCharts();
+    } else {
+        generateSampleCharts();
+    }
+}
+
+function showMessage() {
+    const messageHtml = `
+        <div class="col-12 text-center py-5">
+            <div class="alert alert-info">
+                <h4><i class="fas fa-info-circle me-2"></i>No Results Yet</h4>
+                <p class="mb-0">${serverData.message || "Run some tests first to see aggregated results here!"}</p>
+                <a href="/test" class="btn btn-primary mt-3">
+                    <i class="fas fa-play me-2"></i>Run Tests Now
+                </a>
+            </div>
+        </div>
+    `;
+    document.getElementById('overviewStats').innerHTML = messageHtml;
 }
 
 function displayOverviewStats(summary) {
@@ -304,8 +319,49 @@ function displayKeyInsights(data) {
     document.getElementById('keyInsights').innerHTML = insightsHtml;
 }
 
+function loadServerCharts() {
+    const chartsHtml = `
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div id="modelPerformanceChart"></div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div id="varietyHeatmapChart"></div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div id="responseLengthChart"></div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div id="taskSuccessChart"></div>
+            </div>
+        </div>
+    `;
+    document.getElementById('interactiveCharts').innerHTML = chartsHtml;
+    
+    // Load server-generated charts if available
+    if (serverData.charts.model_performance) {
+        const modelPerfData = JSON.parse(serverData.charts.model_performance);
+        Plotly.newPlot('modelPerformanceChart', modelPerfData.data, modelPerfData.layout);
+    }
+    
+    if (serverData.charts.variety_heatmap) {
+        const varietyData = JSON.parse(serverData.charts.variety_heatmap);
+        Plotly.newPlot('varietyHeatmapChart', varietyData.data, varietyData.layout);
+    }
+    
+    if (serverData.charts.response_length) {
+        const lengthData = JSON.parse(serverData.charts.response_length);
+        Plotly.newPlot('responseLengthChart', lengthData.data, lengthData.layout);
+    }
+    
+    if (serverData.charts.task_success) {
+        const taskData = JSON.parse(serverData.charts.task_success);
+        Plotly.newPlot('taskSuccessChart', taskData.data, taskData.layout);
+    }
+}
+
 function generateSampleCharts() {
-    // Sample chart data
+    // Fallback sample charts when no data available
     const modelData = {
         x: ['Gemini', 'Mistral', 'Cohere'],
         y: [0.75, 0.68, 0.61],
