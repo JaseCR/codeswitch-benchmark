@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Code-Switching Benchmark{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-5">
+    <!-- Hero Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="hero-section text-center">
+                <h1 class="display-4 fw-bold text-primary mb-3">
+                    <i class="fas fa-language me-3"></i>
+                    Code-Switching Benchmark
+                </h1>
+                <p class="lead text-muted mb-4">
+                    Test how well language models preserve dialectal markers and code-switching patterns
+                </p>
+                <div class="hero-buttons">
+                    <a href="{{ url_for('test_page') }}" class="btn btn-primary btn-lg me-3">
+                        <i class="fas fa-flask me-2"></i>Start Testing
+                    </a>
+                    <a href="{{ url_for('results_page') }}" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-chart-bar me-2"></i>View Results
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="row mb-5">
+        <div class="col-md-4 mb-4">
+            <div class="feature-card h-100">
+                <div class="feature-icon">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <h4>Multi-Variety Testing</h4>
+                <p>Test models across AAVE, Spanglish, British English, and Standard English varieties.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="feature-card h-100">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h4>Multiple Models</h4>
+                <p>Compare performance across Gemini, Mistral, and Cohere language models.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="feature-card h-100">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h4>Real-time Analysis</h4>
+                <p>Get instant visualizations and detailed analysis of code-switching retention.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="text-center mb-4">Benchmark Overview</h3>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Language Varieties</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Task Types</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">3</div>
+                <div class="stat-label">AI Models</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Test Cases</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Language Varieties -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <h3 class="text-center mb-4">Language Varieties Tested</h3>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="variety-card aave">
+                <div class="variety-header">
+                    <i class="fas fa-flag-usa"></i>
+                    <h5>AAVE</h5>
+                </div>
+                <p>African American Vernacular English with distinctive grammatical and lexical features.</p>
+                <div class="variety-example">
+                    <small>"Yo, I'm finna go to the store real quick"</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="variety-card spanglish">
+                <div class="variety-header">
+                    <i class="fas fa-flag"></i>
+                    <h5>Spanglish</h5>
+                </div>
+                <p>Spanish-English code-switching with fluid language mixing patterns.</p>
+                <div class="variety-example">
+                    <small>"Hola, ¿cómo estás? I'm doing bien"</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="variety-card breng">
+                <div class="variety-header">
+                    <i class="fas fa-flag-uk"></i>
+                    <h5>BrEng</h5>
+                </div>
+                <p>British English with distinctive vocabulary and expressions.</p>
+                <div class="variety-example">
+                    <small>"That's brilliant! Fancy a cuppa?"</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="variety-card stdeng">
+                <div class="variety-header">
+                    <i class="fas fa-globe"></i>
+                    <h5>StdEng</h5>
+                </div>
+                <p>Standard English as a baseline for comparison.</p>
+                <div class="variety-example">
+                    <small>"Please send the document to the office"</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- How It Works -->
+    <div class="row">
+        <div class="col-12">
+            <h3 class="text-center mb-4">How It Works</h3>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h5>Enter API Keys</h5>
+                <p>Provide your API keys for Gemini, Mistral, and/or Cohere models.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h5>Run Tests</h5>
+                <p>Our system tests each model with carefully crafted code-switching prompts.</p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h5>Analyze Results</h5>
+                <p>Get detailed visualizations showing how well models preserve dialectal markers.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

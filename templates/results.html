@@ -1,0 +1,352 @@
+{% extends "base.html" %}
+
+{% block title %}Results - Code-Switching Benchmark{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center mb-5">
+                <i class="fas fa-chart-bar me-3"></i>
+                Analysis Results
+            </h1>
+        </div>
+    </div>
+
+    <!-- Results Overview -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-analytics me-2"></i>
+                        Benchmark Results Overview
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row" id="overviewStats">
+                        <!-- Overview stats will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Visualizations -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="fas fa-chart-line me-2"></i>
+                        Interactive Analysis
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div id="interactiveCharts">
+                        <!-- Charts will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Model Comparison -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="fas fa-balance-scale me-2"></i>
+                        Model Performance Comparison
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row" id="modelComparison">
+                        <!-- Model comparison will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Language Variety Analysis -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="fas fa-globe me-2"></i>
+                        Language Variety Analysis
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row" id="varietyAnalysis">
+                        <!-- Variety analysis will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Key Insights -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="fas fa-lightbulb me-2"></i>
+                        Key Insights
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row" id="keyInsights">
+                        <!-- Key insights will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Methodology -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="fas fa-microscope me-2"></i>
+                        Methodology
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Test Design</h5>
+                            <ul>
+                                <li><strong>4 Language Varieties:</strong> AAVE, Spanglish, BrEng, StdEng</li>
+                                <li><strong>3 Task Types:</strong> Paraphrase, Continue, Explain</li>
+                                <li><strong>3 AI Models:</strong> Gemini, Mistral, Cohere</li>
+                                <li><strong>12 Total Test Cases:</strong> Comprehensive coverage</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Evaluation Metrics</h5>
+                            <ul>
+                                <li><strong>Marker Retention Rate:</strong> Percentage of dialectal markers preserved</li>
+                                <li><strong>Response Quality:</strong> Length and coherence analysis</li>
+                                <li><strong>Success Rate:</strong> Successful API responses</li>
+                                <li><strong>Variety Consistency:</strong> Performance across linguistic varieties</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+// Load sample data for demonstration
+document.addEventListener('DOMContentLoaded', function() {
+    loadSampleResults();
+});
+
+function loadSampleResults() {
+    // Sample data for demonstration
+    const sampleData = {
+        summary: {
+            total_tests: 12,
+            successful_tests: 11,
+            models_tested: 3,
+            varieties_tested: 4,
+            average_retention_rate: 0.68
+        },
+        model_performance: {
+            gemini: 0.75,
+            mistral: 0.68,
+            cohere: 0.61
+        },
+        variety_difficulty: {
+            AAVE: 0.72,
+            Spanglish: 0.58,
+            BrEng: 0.78,
+            StdEng: 0.85
+        }
+    };
+    
+    displayOverviewStats(sampleData.summary);
+    displayModelComparison(sampleData.model_performance);
+    displayVarietyAnalysis(sampleData.variety_difficulty);
+    displayKeyInsights(sampleData);
+    generateSampleCharts();
+}
+
+function displayOverviewStats(summary) {
+    const overviewHtml = `
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">${summary.total_tests}</div>
+                <div class="stat-label">Total Tests</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">${(summary.average_retention_rate * 100).toFixed(1)}%</div>
+                <div class="stat-label">Avg Retention</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">${summary.models_tested}</div>
+                <div class="stat-label">Models Tested</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">${summary.varieties_tested}</div>
+                <div class="stat-label">Varieties Tested</div>
+            </div>
+        </div>
+    `;
+    document.getElementById('overviewStats').innerHTML = overviewHtml;
+}
+
+function displayModelComparison(modelPerf) {
+    let comparisonHtml = '';
+    Object.entries(modelPerf).forEach(([model, score]) => {
+        const percentage = (score * 100).toFixed(1);
+        const color = score > 0.7 ? 'success' : score > 0.6 ? 'warning' : 'danger';
+        
+        comparisonHtml += `
+            <div class="col-md-4 mb-3">
+                <div class="model-card">
+                    <div class="model-header">
+                        <h5>${model.toUpperCase()}</h5>
+                        <span class="badge bg-${color}">${percentage}%</span>
+                    </div>
+                    <div class="progress mb-2">
+                        <div class="progress-bar bg-${color}" style="width: ${percentage}%"></div>
+                    </div>
+                    <small class="text-muted">Code-switching retention rate</small>
+                </div>
+            </div>
+        `;
+    });
+    document.getElementById('modelComparison').innerHTML = comparisonHtml;
+}
+
+function displayVarietyAnalysis(varietyDiff) {
+    let varietyHtml = '';
+    Object.entries(varietyDiff).forEach(([variety, score]) => {
+        const percentage = (score * 100).toFixed(1);
+        const difficulty = score > 0.7 ? 'Easy' : score > 0.6 ? 'Medium' : 'Hard';
+        const color = score > 0.7 ? 'success' : score > 0.6 ? 'warning' : 'danger';
+        
+        varietyHtml += `
+            <div class="col-md-6 col-lg-3 mb-3">
+                <div class="variety-result-card">
+                    <div class="variety-header">
+                        <h6>${variety}</h6>
+                        <span class="badge bg-${color}">${difficulty}</span>
+                    </div>
+                    <div class="variety-score">
+                        <div class="score-number">${percentage}%</div>
+                        <div class="score-label">Retention Rate</div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    document.getElementById('varietyAnalysis').innerHTML = varietyHtml;
+}
+
+function displayKeyInsights(data) {
+    const insightsHtml = `
+        <div class="col-md-6 mb-4">
+            <div class="insight-card">
+                <div class="insight-icon">
+                    <i class="fas fa-trophy text-warning"></i>
+                </div>
+                <h6>Best Performing Model</h6>
+                <p>Gemini shows the highest code-switching retention rate at 75%, demonstrating strong dialectal awareness.</p>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="insight-card">
+                <div class="insight-icon">
+                    <i class="fas fa-exclamation-triangle text-danger"></i>
+                </div>
+                <h6>Most Challenging Variety</h6>
+                <p>Spanglish presents the greatest challenge with only 58% retention, likely due to complex code-switching patterns.</p>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="insight-card">
+                <div class="insight-icon">
+                    <i class="fas fa-chart-line text-success"></i>
+                </div>
+                <h6>Overall Performance</h6>
+                <p>Models achieve 68% average retention, indicating room for improvement in dialectal consistency.</p>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="insight-card">
+                <div class="insight-icon">
+                    <i class="fas fa-globe text-info"></i>
+                </div>
+                <h6>Variety Consistency</h6>
+                <p>Standard English shows highest retention (85%), while code-switching varieties need more attention.</p>
+            </div>
+        </div>
+    `;
+    document.getElementById('keyInsights').innerHTML = insightsHtml;
+}
+
+function generateSampleCharts() {
+    // Sample chart data
+    const modelData = {
+        x: ['Gemini', 'Mistral', 'Cohere'],
+        y: [0.75, 0.68, 0.61],
+        type: 'bar',
+        marker: {color: ['#FF6B6B', '#4ECDC4', '#45B7D1']}
+    };
+    
+    const varietyData = {
+        x: ['AAVE', 'Spanglish', 'BrEng', 'StdEng'],
+        y: [0.72, 0.58, 0.78, 0.85],
+        type: 'bar',
+        marker: {color: ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4']}
+    };
+    
+    const modelLayout = {
+        title: 'Model Performance Comparison',
+        xaxis: {title: 'Model'},
+        yaxis: {title: 'Retention Rate', tickformat: '.0%'},
+        template: 'plotly_white'
+    };
+    
+    const varietyLayout = {
+        title: 'Language Variety Difficulty',
+        xaxis: {title: 'Language Variety'},
+        yaxis: {title: 'Retention Rate', tickformat: '.0%'},
+        template: 'plotly_white'
+    };
+    
+    // Create charts
+    const chartsHtml = `
+        <div class="col-md-6 mb-4">
+            <div id="modelChart"></div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div id="varietyChart"></div>
+        </div>
+    `;
+    document.getElementById('interactiveCharts').innerHTML = chartsHtml;
+    
+    Plotly.newPlot('modelChart', [modelData], modelLayout);
+    Plotly.newPlot('varietyChart', [varietyData], varietyLayout);
+}
+</script>
+{% endblock %}

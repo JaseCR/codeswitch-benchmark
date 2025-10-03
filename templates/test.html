@@ -1,0 +1,357 @@
+{% extends "base.html" %}
+
+{% block title %}Test Models - Code-Switching Benchmark{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center mb-5">
+                <i class="fas fa-flask me-3"></i>
+                Test Language Models
+            </h1>
+        </div>
+    </div>
+
+    <!-- API Keys Form -->
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="card shadow-lg">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-key me-2"></i>
+                        API Configuration
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form id="testForm">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label for="geminiKey" class="form-label">
+                                    <i class="fas fa-robot me-1"></i>Gemini API Key
+                                </label>
+                                <input type="password" class="form-control" id="geminiKey" 
+                                       placeholder="Enter Gemini API key">
+                                <div class="form-text">
+                                    <a href="https://makersuite.google.com/app/apikey" target="_blank">
+                                        Get Gemini API Key
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="mistralKey" class="form-label">
+                                    <i class="fas fa-brain me-1"></i>Mistral API Key
+                                </label>
+                                <input type="password" class="form-control" id="mistralKey" 
+                                       placeholder="Enter Mistral API key">
+                                <div class="form-text">
+                                    <a href="https://console.mistral.ai/" target="_blank">
+                                        Get Mistral API Key
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="cohereKey" class="form-label">
+                                    <i class="fas fa-microchip me-1"></i>Cohere API Key
+                                </label>
+                                <input type="password" class="form-control" id="cohereKey" 
+                                       placeholder="Enter Cohere API key">
+                                <div class="form-text">
+                                    <a href="https://dashboard.cohere.ai/" target="_blank">
+                                        Get Cohere API Key
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg" id="runTestsBtn">
+                                <i class="fas fa-play me-2"></i>
+                                Run Code-Switching Tests
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test Progress -->
+    <div class="row mb-5" id="progressSection" style="display: none;">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="spinner-border text-primary mb-3" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <h5>Running Code-Switching Tests...</h5>
+                    <p class="text-muted">This may take a few moments as we test each model.</p>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                             role="progressbar" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test Results -->
+    <div class="row" id="resultsSection" style="display: none;">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-check-circle me-2"></i>
+                        Test Results
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <!-- Summary Stats -->
+                    <div class="row mb-4" id="summaryStats">
+                        <!-- Summary will be populated by JavaScript -->
+                    </div>
+
+                    <!-- Detailed Results -->
+                    <div class="row" id="detailedResults">
+                        <!-- Results will be populated by JavaScript -->
+                    </div>
+
+                    <!-- Visualizations -->
+                    <div class="row mt-5" id="visualizations">
+                        <div class="col-12">
+                            <h4 class="mb-4">
+                                <i class="fas fa-chart-bar me-2"></i>
+                                Analysis Visualizations
+                            </h4>
+                            <div id="chartsContainer">
+                                <!-- Charts will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test Prompts Preview -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <h3 class="text-center mb-4">Test Prompts Preview</h3>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="prompt-card aave">
+                <div class="prompt-header">
+                    <i class="fas fa-flag-usa"></i>
+                    <h6>AAVE - Paraphrase</h6>
+                </div>
+                <p class="prompt-text">"Yo, I'm finna go to the store real quick, you want anything?"</p>
+                <div class="prompt-markers">
+                    <small>Expected markers: finna, yo, real quick</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="prompt-card spanglish">
+                <div class="prompt-header">
+                    <i class="fas fa-flag"></i>
+                    <h6>Spanglish - Continue</h6>
+                </div>
+                <p class="prompt-text">"Hola, ¿cómo estás? I'm doing bien, gracias."</p>
+                <div class="prompt-markers">
+                    <small>Expected markers: hola, cómo, bien, gracias</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="prompt-card breng">
+                <div class="prompt-header">
+                    <i class="fas fa-flag-uk"></i>
+                    <h6>BrEng - Explain</h6>
+                </div>
+                <p class="prompt-text">"That's brilliant! Fancy a cuppa? The lift's broken again."</p>
+                <div class="prompt-markers">
+                    <small>Expected markers: brilliant, fancy, cuppa, lift</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="prompt-card stdeng">
+                <div class="prompt-header">
+                    <i class="fas fa-globe"></i>
+                    <h6>StdEng - Paraphrase</h6>
+                </div>
+                <p class="prompt-text">"Please send the document to the office by tomorrow."</p>
+                <div class="prompt-markers">
+                    <small>Expected markers: please, send, document, office</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+// Debug: Check if form exists
+console.log('Form element:', document.getElementById('testForm'));
+console.log('Results section element:', document.getElementById('resultsSection'));
+console.log('Progress section element:', document.getElementById('progressSection'));
+
+// Add click handler to button as backup
+document.getElementById('runTestsBtn').addEventListener('click', function(e) {
+    console.log('Button clicked!');
+    e.preventDefault();
+    document.getElementById('testForm').dispatchEvent(new Event('submit'));
+});
+
+document.getElementById('testForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    console.log('Form submitted!');
+    
+    const geminiKey = document.getElementById('geminiKey').value;
+    const mistralKey = document.getElementById('mistralKey').value;
+    const cohereKey = document.getElementById('cohereKey').value;
+    
+    console.log('API Keys:', {gemini: geminiKey ? 'provided' : 'empty', mistral: mistralKey ? 'provided' : 'empty', cohere: cohereKey ? 'provided' : 'empty'});
+    
+    if (!geminiKey && !mistralKey && !cohereKey) {
+        alert('Please provide at least one API key');
+        return;
+    }
+    
+    // Show progress
+    document.getElementById('progressSection').style.display = 'block';
+    document.getElementById('resultsSection').style.display = 'none';
+    
+    try {
+        console.log('Making API request...');
+        const response = await fetch('/api/test', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                gemini_key: geminiKey,
+                mistral_key: mistralKey,
+                cohere_key: cohereKey
+            })
+        });
+        
+        console.log('Response status:', response.status);
+        const data = await response.json();
+        console.log('Response data:', data);
+        
+        if (data.success) {
+            console.log('Success! Displaying results...');
+            displayResults(data.results, data.summary);
+            generateVisualizations(data.results);
+        } else {
+            console.log('API returned error:', data.error);
+            alert('Error: ' + data.error);
+        }
+    } catch (error) {
+        console.error('Fetch error:', error);
+        alert('Error running tests: ' + error.message);
+    } finally {
+        document.getElementById('progressSection').style.display = 'none';
+    }
+});
+
+function displayResults(results, summary) {
+    console.log('Displaying results:', results, summary);
+    console.log('Results section element:', document.getElementById('resultsSection'));
+    // Show results section
+    document.getElementById('resultsSection').style.display = 'block';
+    console.log('Results section should now be visible');
+    
+    // Display summary stats
+    const summaryHtml = `
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">${summary.total_tests}</div>
+                <div class="stat-label">Total Tests</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">${(summary.average_retention_rate * 100).toFixed(1)}%</div>
+                <div class="stat-label">Avg Retention</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">${summary.models_tested}</div>
+                <div class="stat-label">Models Tested</div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="stat-card text-center">
+                <div class="stat-number">${summary.varieties_tested}</div>
+                <div class="stat-label">Varieties Tested</div>
+            </div>
+        </div>
+    `;
+    document.getElementById('summaryStats').innerHTML = summaryHtml;
+    
+    // Display detailed results
+    let resultsHtml = '';
+    results.forEach(result => {
+        const successIcon = result.success ? 'check-circle text-success' : 'times-circle text-danger';
+        const retentionPercent = (result.retention_rate * 100).toFixed(1);
+        
+        resultsHtml += `
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="result-card">
+                    <div class="result-header">
+                        <i class="fas fa-${successIcon}"></i>
+                        <h6>${result.model.toUpperCase()} - ${result.variety}</h6>
+                    </div>
+                    <div class="result-content">
+                        <p><strong>Input:</strong> "${result.input_text}"</p>
+                        <p><strong>Output:</strong> "${result.output_text.substring(0, 100)}..."</p>
+                        <div class="result-stats">
+                            <span class="badge bg-primary">${retentionPercent}% Retention</span>
+                            <span class="badge bg-secondary">${result.response_length} words</span>
+                        </div>
+                        <div class="result-markers">
+                            <small><strong>Found markers:</strong> ${result.found_markers.join(', ') || 'None'}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    document.getElementById('detailedResults').innerHTML = resultsHtml;
+}
+
+async function generateVisualizations(results) {
+    try {
+        const response = await fetch('/api/visualize', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ results: results })
+        });
+        
+        const data = await response.json();
+        
+        if (data.success) {
+            const chartsContainer = document.getElementById('chartsContainer');
+            chartsContainer.innerHTML = '';
+            
+            // Create charts
+            Object.entries(data.charts).forEach(([key, chartData]) => {
+                const chartDiv = document.createElement('div');
+                chartDiv.className = 'col-md-6 mb-4';
+                chartDiv.id = `chart-${key}`;
+                chartsContainer.appendChild(chartDiv);
+                
+                Plotly.newPlot(`chart-${key}`, JSON.parse(chartData).data, JSON.parse(chartData).layout);
+            });
+        }
+    } catch (error) {
+        console.error('Error generating visualizations:', error);
+    }
+}
+</script>
+{% endblock %}
