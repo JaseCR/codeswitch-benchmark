@@ -660,3 +660,21 @@ body {
 .fa-info-circle:hover {
     opacity: 1;
 }
+
+/* Chart explanations */
+.chart-explanation {
+    background: rgba(99, 102, 241, 0.05);
+    border-left: 3px solid var(--primary-color);
+    padding: 0.75rem 1rem;
+    border-radius: 0 6px 6px 0;
+    margin-bottom: 1rem;
+}
+
+.chart-explanation small {
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+.chart-explanation i {
+    color: var(--primary-color);
+}

@@ -44,9 +44,34 @@
                     <h4 class="mb-0">
                         <i class="fas fa-chart-line me-2"></i>
                         Interactive Analysis
+                        <i class="fas fa-info-circle text-muted ms-2" 
+                           data-bs-toggle="tooltip" 
+                           title="Interactive visualizations showing detailed performance breakdowns across models and language varieties"></i>
                     </h4>
                 </div>
                 <div class="card-body">
+                    <!-- Chart Explanations -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="alert alert-info">
+                                <h6><i class="fas fa-lightbulb me-2"></i>Understanding the Charts</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <ul class="list-unstyled mb-0">
+                                            <li><i class="fas fa-chart-bar text-primary me-2"></i><strong>Model Performance:</strong> Bar chart comparing retention rates</li>
+                                            <li><i class="fas fa-th text-warning me-2"></i><strong>Variety Heatmap:</strong> Color-coded performance by variety</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul class="list-unstyled mb-0">
+                                            <li><i class="fas fa-box text-info me-2"></i><strong>Response Length:</strong> Distribution of word counts</li>
+                                            <li><i class="fas fa-check-circle text-success me-2"></i><strong>Task Success:</strong> Success rates by task type</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div id="interactiveCharts">
                         <!-- Charts will be populated by JavaScript -->
                     </div>
@@ -427,22 +452,62 @@ function loadServerCharts() {
     // Load server-generated charts if available
     if (serverData.charts.model_performance) {
         const modelPerfData = JSON.parse(serverData.charts.model_performance);
-        Plotly.newPlot('modelPerformanceChart', modelPerfData.data, modelPerfData.layout);
+        // Add explanation div
+        document.getElementById('modelPerformanceChart').innerHTML = `
+            <div class="chart-explanation mb-3">
+                <small class="text-muted">
+                    <i class="fas fa-info-circle me-1"></i>
+                    This chart shows how well each model preserves dialectal markers across all language varieties. Higher bars indicate better performance.
+                </small>
+            </div>
+            <div id="modelPerformanceChartPlot"></div>
+        `;
+        Plotly.newPlot('modelPerformanceChartPlot', modelPerfData.data, modelPerfData.layout);
     }
     
     if (serverData.charts.variety_heatmap) {
         const varietyData = JSON.parse(serverData.charts.variety_heatmap);
-        Plotly.newPlot('varietyHeatmapChart', varietyData.data, varietyData.layout);
+        // Add explanation div
+        document.getElementById('varietyHeatmapChart').innerHTML = `
+            <div class="chart-explanation mb-3">
+                <small class="text-muted">
+                    <i class="fas fa-info-circle me-1"></i>
+                    This heatmap shows retention rates by language variety and model. Green = high retention, red = low retention.
+                </small>
+            </div>
+            <div id="varietyHeatmapChartPlot"></div>
+        `;
+        Plotly.newPlot('varietyHeatmapChartPlot', varietyData.data, varietyData.layout);
     }
     
     if (serverData.charts.response_length) {
         const lengthData = JSON.parse(serverData.charts.response_length);
-        Plotly.newPlot('responseLengthChart', lengthData.data, lengthData.layout);
+        // Add explanation div
+        document.getElementById('responseLengthChart').innerHTML = `
+            <div class="chart-explanation mb-3">
+                <small class="text-muted">
+                    <i class="fas fa-info-circle me-1"></i>
+                    This box plot shows the distribution of response lengths (word counts) by model. Longer responses may indicate more detailed processing.
+                </small>
+            </div>
+            <div id="responseLengthChartPlot"></div>
+        `;
+        Plotly.newPlot('responseLengthChartPlot', lengthData.data, lengthData.layout);
     }
     
     if (serverData.charts.task_success) {
         const taskData = JSON.parse(serverData.charts.task_success);
-        Plotly.newPlot('taskSuccessChart', taskData.data, taskData.layout);
+        // Add explanation div
+        document.getElementById('taskSuccessChart').innerHTML = `
+            <div class="chart-explanation mb-3">
+                <small class="text-muted">
+                    <i class="fas fa-info-circle me-1"></i>
+                    This chart shows the success rate (percentage of tests without errors) for each task type by model.
+                </small>
+            </div>
+            <div id="taskSuccessChartPlot"></div>
+        `;
+        Plotly.newPlot('taskSuccessChartPlot', taskData.data, taskData.layout);
     }
 }
 
@@ -476,12 +541,24 @@ function generateSampleCharts() {
         template: 'plotly_white'
     };
     
-    // Create charts
+    // Create charts with explanations
     const chartsHtml = `
         <div class="col-md-6 mb-4">
+            <div class="chart-explanation mb-3">
+                <small class="text-muted">
+                    <i class="fas fa-info-circle me-1"></i>
+                    This chart shows how well each model preserves dialectal markers across all language varieties. Higher bars indicate better performance.
+                </small>
+            </div>
             <div id="modelChart"></div>
         </div>
         <div class="col-md-6 mb-4">
+            <div class="chart-explanation mb-3">
+                <small class="text-muted">
+                    <i class="fas fa-info-circle me-1"></i>
+                    This chart shows retention rates by language variety. Higher bars indicate that variety is easier for models to preserve accurately.
+                </small>
+            </div>
             <div id="varietyChart"></div>
         </div>
     `;
