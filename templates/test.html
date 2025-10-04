@@ -132,8 +132,40 @@
         </div>
     </div>
 
-    <!-- Test Prompts Preview -->
+    <!-- How Retention Rate Works -->
     <div class="row mt-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Understanding Retention Rate
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p><strong>Retention Rate</strong> measures how well language models preserve dialectal markers and code-switching elements when processing text.</p>
+                            <div class="example-box p-3 bg-light rounded">
+                                <strong>Example:</strong> If a model receives "Yo, I'm finna go to the store real quick" and responds with "Hey, I'm about to go to the store quickly," it preserved 1 out of 3 markers ("yo" → "hey"), giving a 33% retention rate.
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h6>What are dialectal markers?</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i>AAVE: "finna", "yo", "real quick"</li>
+                                <li><i class="fas fa-check text-success me-2"></i>Spanglish: "hola", "bien", "gracias"</li>
+                                <li><i class="fas fa-check text-success me-2"></i>BrEng: "brilliant", "cuppa", "lift"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Test Prompts Preview -->
+    <div class="row mt-4">
         <div class="col-12">
             <h3 class="text-center mb-4">Test Prompts Preview</h3>
         </div>
@@ -309,7 +341,7 @@ function displayResults(results, summary) {
                         <p><strong>Input:</strong> "${result.input_text}"</p>
                         <p><strong>Output:</strong> "${result.output_text.substring(0, 100)}..."</p>
                         <div class="result-stats">
-                            <span class="badge bg-primary">${retentionPercent}% Retention</span>
+                            <span class="badge bg-primary" data-bs-toggle="tooltip" title="Percentage of dialectal markers preserved">${retentionPercent}% Retention</span>
                             <span class="badge bg-secondary">${result.response_length} words</span>
                         </div>
                         <div class="result-markers">
@@ -321,6 +353,11 @@ function displayResults(results, summary) {
         `;
     });
     document.getElementById('detailedResults').innerHTML = resultsHtml;
+    
+    // Re-initialize tooltips for dynamically added content
+    if (window.CodeSwitchingUtils && window.CodeSwitchingUtils.reinitializeTooltips) {
+        window.CodeSwitchingUtils.reinitializeTooltips();
+    }
 }
 
 async function generateVisualizations(results) {

@@ -614,3 +614,49 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary-color);
 }
+
+/* Explanation Boxes */
+.metric-explanation {
+    padding: 1.5rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    border-left: 4px solid var(--primary-color);
+    height: 100%;
+}
+
+.example-box {
+    background: rgba(99, 102, 241, 0.1);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.difficulty-legend {
+    margin-top: 1rem;
+}
+
+.difficulty-legend .badge {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+}
+
+/* Enhanced tooltips */
+[data-bs-toggle="tooltip"] {
+    cursor: help;
+}
+
+.tooltip {
+    font-size: 0.875rem;
+}
+
+/* Info icons */
+.fa-info-circle {
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.fa-info-circle:hover {
+    opacity: 1;
+}

@@ -2,10 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize tooltips
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl);
-    });
+    initializeTooltips();
 
     // Add smooth scrolling to anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -270,6 +267,29 @@ function handleSuccess(message) {
     showNotification(message, 'success');
 }
 
+// Initialize tooltips function
+function initializeTooltips() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+}
+
+// Re-initialize tooltips for dynamically added content
+function reinitializeTooltips() {
+    // Destroy existing tooltips first
+    var existingTooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    existingTooltips.forEach(function(element) {
+        var tooltip = bootstrap.Tooltip.getInstance(element);
+        if (tooltip) {
+            tooltip.dispose();
+        }
+    });
+    
+    // Initialize new tooltips
+    initializeTooltips();
+}
+
 // Export functions for use in other scripts
 window.CodeSwitchingUtils = {
     showNotification,
@@ -282,5 +302,7 @@ window.CodeSwitchingUtils = {
     validateAPIKey,
     setLoadingState,
     handleError,
-    handleSuccess
+    handleSuccess,
+    initializeTooltips,
+    reinitializeTooltips
 };

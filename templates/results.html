@@ -112,6 +112,44 @@
         </div>
     </div>
 
+    <!-- Understanding the Metrics -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="fas fa-lightbulb me-2"></i>
+                        Understanding the Metrics
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="metric-explanation">
+                                <h5><i class="fas fa-percentage me-2 text-primary"></i>Retention Rate</h5>
+                                <p>Measures how well models preserve dialectal markers and code-switching elements when processing text.</p>
+                                <div class="example-box">
+                                    <strong>Example:</strong> If input has 4 dialectal markers and model preserves 3, retention rate = 75%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="metric-explanation">
+                                <h5><i class="fas fa-signal me-2 text-warning"></i>Difficulty Levels</h5>
+                                <p>Indicates how challenging each language variety is for models to preserve accurately.</p>
+                                <div class="difficulty-legend">
+                                    <span class="badge bg-success me-2">Easy (70%+)</span>
+                                    <span class="badge bg-warning me-2">Medium (60-70%)</span>
+                                    <span class="badge bg-danger">Hard (<60%)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Methodology -->
     <div class="row">
         <div class="col-12">
@@ -250,6 +288,20 @@ function displayModelComparison(modelPerf) {
         `;
     });
     document.getElementById('modelComparison').innerHTML = comparisonHtml;
+    
+    // Re-initialize tooltips for dynamically added content
+    if (window.CodeSwitchingUtils && window.CodeSwitchingUtils.reinitializeTooltips) {
+        window.CodeSwitchingUtils.reinitializeTooltips();
+    }
+}
+
+function getDifficultyExplanation(difficulty) {
+    const explanations = {
+        'Easy': 'Models easily preserve dialectal markers (70%+ retention)',
+        'Medium': 'Models moderately preserve dialectal markers (60-70% retention)', 
+        'Hard': 'Models struggle to preserve dialectal markers (<60% retention)'
+    };
+    return explanations[difficulty] || '';
 }
 
 function displayVarietyAnalysis(varietyDiff) {
@@ -264,17 +316,29 @@ function displayVarietyAnalysis(varietyDiff) {
                 <div class="variety-result-card">
                     <div class="variety-header">
                         <h6>${variety}</h6>
-                        <span class="badge bg-${color}">${difficulty}</span>
+                        <span class="badge bg-${color}" 
+                              data-bs-toggle="tooltip" 
+                              title="${getDifficultyExplanation(difficulty)}">${difficulty}</span>
                     </div>
                     <div class="variety-score">
                         <div class="score-number">${percentage}%</div>
-                        <div class="score-label">Retention Rate</div>
+                        <div class="score-label">
+                            Retention Rate 
+                            <i class="fas fa-info-circle text-muted ms-1" 
+                               data-bs-toggle="tooltip" 
+                               title="Percentage of dialectal markers preserved by models"></i>
+                        </div>
                     </div>
                 </div>
             </div>
         `;
     });
     document.getElementById('varietyAnalysis').innerHTML = varietyHtml;
+    
+    // Re-initialize tooltips for dynamically added content
+    if (window.CodeSwitchingUtils && window.CodeSwitchingUtils.reinitializeTooltips) {
+        window.CodeSwitchingUtils.reinitializeTooltips();
+    }
 }
 
 function displayKeyInsights(data) {
