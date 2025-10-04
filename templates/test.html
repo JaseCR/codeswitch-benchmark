@@ -157,6 +157,11 @@
                                 <li><i class="fas fa-check text-success me-2"></i>Spanglish: "hola", "bien", "gracias"</li>
                                 <li><i class="fas fa-check text-success me-2"></i>BrEng: "brilliant", "cuppa", "lift"</li>
                             </ul>
+                            <h6 class="mt-3">Other Metrics:</h6>
+                            <ul class="list-unstyled small">
+                                <li><i class="fas fa-check-circle text-success me-2"></i><strong>Success Rate:</strong> Tests without errors</li>
+                                <li><i class="fas fa-ruler text-info me-2"></i><strong>Response Length:</strong> Word count in outputs</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -298,25 +303,25 @@ function displayResults(results, summary) {
     // Display summary stats
     const summaryHtml = `
         <div class="col-md-3 mb-3">
-            <div class="stat-card text-center">
+            <div class="stat-card text-center" data-bs-toggle="tooltip" title="Total number of individual test cases run">
                 <div class="stat-number">${summary.total_tests}</div>
                 <div class="stat-label">Total Tests</div>
             </div>
         </div>
         <div class="col-md-3 mb-3">
-            <div class="stat-card text-center">
+            <div class="stat-card text-center" data-bs-toggle="tooltip" title="Average percentage of dialectal markers preserved across all tests">
                 <div class="stat-number">${(summary.average_retention_rate * 100).toFixed(1)}%</div>
                 <div class="stat-label">Avg Retention</div>
             </div>
         </div>
         <div class="col-md-3 mb-3">
-            <div class="stat-card text-center">
+            <div class="stat-card text-center" data-bs-toggle="tooltip" title="Number of different AI models tested">
                 <div class="stat-number">${summary.models_tested}</div>
                 <div class="stat-label">Models Tested</div>
             </div>
         </div>
         <div class="col-md-3 mb-3">
-            <div class="stat-card text-center">
+            <div class="stat-card text-center" data-bs-toggle="tooltip" title="Number of different language varieties tested">
                 <div class="stat-number">${summary.varieties_tested}</div>
                 <div class="stat-label">Varieties Tested</div>
             </div>
@@ -342,7 +347,7 @@ function displayResults(results, summary) {
                         <p><strong>Output:</strong> "${result.output_text.substring(0, 100)}..."</p>
                         <div class="result-stats">
                             <span class="badge bg-primary" data-bs-toggle="tooltip" title="Percentage of dialectal markers preserved">${retentionPercent}% Retention</span>
-                            <span class="badge bg-secondary">${result.response_length} words</span>
+                            <span class="badge bg-secondary" data-bs-toggle="tooltip" title="Number of words in the model's response">${result.response_length} words</span>
                         </div>
                         <div class="result-markers">
                             <small><strong>Found markers:</strong> ${result.found_markers.join(', ') || 'None'}</small>

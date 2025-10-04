@@ -144,6 +144,24 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="metric-explanation">
+                                <h5><i class="fas fa-check-circle me-2 text-success"></i>Success Rate</h5>
+                                <p>Percentage of tests that completed successfully without API errors or failures.</p>
+                                <div class="example-box">
+                                    <strong>Example:</strong> If 10 out of 12 tests run successfully, success rate = 83%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="metric-explanation">
+                                <h5><i class="fas fa-ruler me-2 text-info"></i>Response Length</h5>
+                                <p>Average number of words in model responses, indicating verbosity and detail.</p>
+                                <div class="example-box">
+                                    <strong>Example:</strong> Longer responses may indicate more thoughtful processing but could lose focus
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -174,10 +192,11 @@
                         <div class="col-md-6">
                             <h5>Evaluation Metrics</h5>
                             <ul>
-                                <li><strong>Marker Retention Rate:</strong> Percentage of dialectal markers preserved</li>
-                                <li><strong>Response Quality:</strong> Length and coherence analysis</li>
-                                <li><strong>Success Rate:</strong> Successful API responses</li>
-                                <li><strong>Variety Consistency:</strong> Performance across linguistic varieties</li>
+                                <li><strong>Marker Retention Rate:</strong> Percentage of dialectal markers preserved in model outputs</li>
+                                <li><strong>Success Rate:</strong> Percentage of tests completed without API errors or failures</li>
+                                <li><strong>Response Length:</strong> Average word count in model responses (indicates verbosity)</li>
+                                <li><strong>Model Performance:</strong> Comparative analysis across different AI models</li>
+                                <li><strong>Variety Difficulty:</strong> How challenging each language variety is for models</li>
                             </ul>
                         </div>
                     </div>
@@ -239,25 +258,25 @@ function showMessage() {
 function displayOverviewStats(summary) {
     const overviewHtml = `
         <div class="col-md-3 mb-3">
-            <div class="stat-card text-center">
+            <div class="stat-card text-center" data-bs-toggle="tooltip" title="Total number of individual test cases run across all sessions">
                 <div class="stat-number">${summary.total_tests}</div>
                 <div class="stat-label">Total Tests</div>
             </div>
         </div>
         <div class="col-md-3 mb-3">
-            <div class="stat-card text-center">
+            <div class="stat-card text-center" data-bs-toggle="tooltip" title="Average percentage of dialectal markers preserved across all tests">
                 <div class="stat-number">${(summary.average_retention_rate * 100).toFixed(1)}%</div>
                 <div class="stat-label">Avg Retention</div>
             </div>
         </div>
         <div class="col-md-3 mb-3">
-            <div class="stat-card text-center">
+            <div class="stat-card text-center" data-bs-toggle="tooltip" title="Number of different AI models tested">
                 <div class="stat-number">${summary.models_tested}</div>
                 <div class="stat-label">Models Tested</div>
             </div>
         </div>
         <div class="col-md-3 mb-3">
-            <div class="stat-card text-center">
+            <div class="stat-card text-center" data-bs-toggle="tooltip" title="Number of different language varieties tested">
                 <div class="stat-number">${summary.varieties_tested}</div>
                 <div class="stat-label">Varieties Tested</div>
             </div>
@@ -277,12 +296,15 @@ function displayModelComparison(modelPerf) {
                 <div class="model-card">
                     <div class="model-header">
                         <h5>${model.toUpperCase()}</h5>
-                        <span class="badge bg-${color}">${percentage}%</span>
+                        <span class="badge bg-${color}" data-bs-toggle="tooltip" title="Average retention rate across all language varieties">${percentage}%</span>
                     </div>
                     <div class="progress mb-2">
                         <div class="progress-bar bg-${color}" style="width: ${percentage}%"></div>
                     </div>
-                    <small class="text-muted">Code-switching retention rate</small>
+                    <small class="text-muted">
+                        Code-switching retention rate 
+                        <i class="fas fa-info-circle text-muted ms-1" data-bs-toggle="tooltip" title="How well this model preserves dialectal markers"></i>
+                    </small>
                 </div>
             </div>
         `;
