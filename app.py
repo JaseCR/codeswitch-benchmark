@@ -7,30 +7,20 @@ A beautiful, functional website for testing language model code-switching capabi
 from flask import Flask, render_template, request, jsonify, session
 import os
 import json
-import pandas as pd
-
-# Configure matplotlib before importing pyplot
-import matplotlib
-matplotlib.use('Agg')  # Use non-interactive backend for server
-import matplotlib.pyplot as plt
-import seaborn as sns
-
-import io
-import base64
-import plotly.graph_objs as go
-import plotly.utils
+import sys
 from datetime import datetime
-import threading
 import time
 
-# Import our existing adapters
-import sys
-import os
-
-# Add src to path for both local and production
+# Add src to path FIRST
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(current_dir, 'src'))
 
+# Now import everything else
+import pandas as pd
+import plotly.graph_objs as go
+import plotly.utils
+
+# Import our adapters
 from adapters.gemini_adapter import GeminiAdapter
 from adapters.mistral_adapter import query_mistral
 from adapters.cohere_adapter import query_cohere
@@ -68,9 +58,7 @@ def add_to_aggregated_results(new_results):
     save_aggregated_results(aggregated)
     return aggregated
 
-# Configure matplotlib for web
-plt.style.use('seaborn-v0_8-colorblind')
-sns.set_palette("husl")
+# Removed matplotlib/seaborn (not needed - we use Plotly)
 
 class CodeSwitchingTester:
     def __init__(self):
