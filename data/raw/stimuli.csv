@@ -1,0 +1,13 @@
+id,variety,task,text
+aave_01,AAVE,paraphrase,He finna go to the store. You sliding?
+aave_02,AAVE,explain,Ion think that plan gon’ work.
+aave_03,AAVE,continue,We was tryna finish that yesterday
+span_01,Spanglish,paraphrase,"Vamos later, it’s muy close to la tienda."
+span_02,Spanglish,explain,"No entiendo bien, pero I think it’s fine."
+span_03,Spanglish,continue,"We can meet en el parque, like at 5."
+br_01,BrEng,paraphrase,Put it in the lorry outside the flat.
+br_02,BrEng,explain,"Take the lift, not the stairs, to the first floor."
+br_03,BrEng,continue,"We’re off on holiday next week, fancy it?"
+std_01,StdEng,paraphrase,He is about to head out. Are you coming?
+std_02,StdEng,explain,Please explain this in simple terms.
+std_03,StdEng,continue,We should wrap this up and send it.

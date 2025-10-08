@@ -1,0 +1,206 @@
+id,variety,task,input_text,output_text,success
+aave_01,AAVE,paraphrase,He finna go to the store. You sliding?,"Here are a few ways to paraphrase or continue that text, maintaining the same dialectal style:
+
+**Paraphrases:**
+
+*   ""He 'bout to hit the store. You tryna roll?""
+*   ""He finna run to the store. You coming through?""
+*   ""He 'bout to make a store run. You down?""
+*   ""He finna go grab some stuff. You hopping in?""
+*   ""He tryna go to the store. You riding with?""
+
+**Continuations:**
+
+*   ""He finna go to the store. You sliding? **I need some snacks.**""
+*   ""He finna go to the store. You sliding? **Bet, I'll be ready in five.**""
+*   ""He finna go to the store. You sliding? **You need anything while he there?**""
+*   ""He finna go to the store. You sliding? **We can link up.**""
+*   ""He finna go to the store. You sliding? **I was tryna hit up the corner store anyway.**""",True
+aave_02,AAVE,explain,Ion think that plan gon’ work.,"Here are a few ways to paraphrase or continue that text in the same dialectal style:
+
+**Paraphrases:**
+
+*   ""I ain't convinced that plan gon' work.""
+*   ""Nah, I don't see that plan happenin'.""
+*   ""That plan ain't lookin' too good to me.""
+*   ""I got my doubts 'bout that plan.""
+*   ""Ion think that plan gonna pan out.""
+
+**Continuations:**
+
+*   ""Ion think that plan gon' work, **it just don't feel right.**""
+*   ""Ion think that plan gon' work, **we tried somethin' like that before.**""
+*   ""Ion think that plan gon' work, **they ain't gon' go for that.**""
+*   ""Ion think that plan gon' work, **we ain't got the resources for all that.**""
+*   ""Ion think that plan gon' work, **we just gon' be wastin' our time.**""
+*   ""Ion think that plan gon' work, **we need to come up with somethin' else.**""",True
+aave_03,AAVE,continue,We was tryna finish that yesterday,"Here are a few ways to paraphrase or continue that text in the same dialectal style:
+
+**Paraphrases:**
+
+*   ""We was tryin' to get that done yesterday.""
+*   ""We was hopin' to wrap that up yesterday.""
+*   ""We was workin' on finishin' that thing yesterday.""
+*   ""We was tryin' to be done with that by yesterday.""
+
+**Continuations:**
+
+*   ""We was tryna finish that yesterday, **but we ain't get to it.**""
+*   ""We was tryna finish that yesterday, **but time just ran out on us.**""
+*   ""We was tryna finish that yesterday, **so now we gotta do it today.**""
+*   ""We was tryna finish that yesterday, **but it just didn't happen.**""
+*   ""We was tryna finish that yesterday, **'cause it was due.**""
+*   ""We was tryna finish that yesterday, **but then somethin' else came up.**""",True
+span_01,Spanglish,paraphrase,"Vamos later, it’s muy close to la tienda.","Here are a few ways to paraphrase or continue that text in the same Spanglish, informal style:
+
+**Paraphrases:**
+
+*   ""We can go later, it's right next to la tienda.""
+*   ""No hay prisa, la tienda está aquí cerquita.""
+*   ""Let's go después, it's super close to the store.""
+*   ""Podemos ir later, está aquí nomás de la tienda.""
+
+**Continuations:**
+
+*   ""Vamos later, it's muy close to la tienda, so we can just walk over, no need for the car.""
+*   ""Vamos later, it's muy close to la tienda, no tenemos que apurarnos. Let's chill a bit first.""
+*   ""Vamos later, it's muy close to la tienda. We can finish this cafecito first, then vamos.""
+*   ""Vamos later, it's muy close to la tienda. It's not going anywhere, we can take our time, mi amor.""
+*   ""Vamos later, it's muy close to la tienda, so we don't need to rush. Podemos ir cuando sea.""",True
+span_02,Spanglish,explain,"No entiendo bien, pero I think it’s fine.","Here are a few ways to paraphrase or continue that text, maintaining the code-switching and casual tone:
+
+**Paraphrases (same meaning, different words):**
+
+1.  **""No lo capto del todo, but I guess it's okay.""** (Uses ""captar"" for ""understand"" and ""guess it's okay"" for ""think it's fine."")
+2.  **""No me queda muy claro, but I think we're good.""** (""No me queda claro"" is a common Spanish idiom for ""it's not clear to me."")
+3.  **""I don't *entender* it fully, but I reckon it'll do.""** (Switches the order of languages and uses ""reckon"" and ""it'll do"" for a slightly different English flavor.)
+4.  **""I *creo* it's fine, though I don't *get* it completely.""** (Mixes the verbs directly into the other language's structure, a very common Spanglish move.)
+5.  **""No lo pillo bien, but I think it's alright.""** (""Pillar"" is another informal Spanish verb for ""to get/understand."")
+
+**Continuations (building on the original sentence):**
+
+1.  ""No entiendo bien, pero I think it’s fine. **We can just go with it.**"" (Adds a decision to proceed.)
+2.  ""No entiendo bien, pero I think it’s fine. **It'll probably work out.**"" (Expresses optimism.)
+3.  ""No entiendo bien, pero I think it’s fine. **No worries.**"" (Offers reassurance.)
+4.  ""No entiendo bien, pero I think it’s fine. **I'll ask about it later.**"" (Indicates a plan for future clarification.)
+5.  ""No entiendo bien, pero I think it’s fine. **It's probably just me.**"" (A bit self-deprecating.)",True
+span_03,Spanglish,continue,"We can meet en el parque, like at 5.","Here are a few ways to paraphrase or continue that text, keeping the same Spanglish, informal style:
+
+**Paraphrases:**
+
+1.  ""Podemos vernos en el parque, como a las cinco."" (Closer to a direct translation, but still natural Spanglish)
+2.  ""Qué tal si nos vemos en el parque, tipo a las cinco?"" (Uses ""tipo"" for ""around/like,"" very common)
+3.  ""How about we link up en el parque, around five?""
+4.  ""Let's meet up en el parque, a las cinco, más o menos."" (Adds ""más o menos"" for ""more or less/around"")
+
+**Continuations:**
+
+1.  ""We can meet en el parque, like at 5. **Is that cool with you?**""
+2.  ""We can meet en el parque, like at 5. **Te parece bien?**""
+3.  ""We can meet en el parque, like at 5. **Y de ahí podemos ir por unos tacos.**"" (And from there we can go get some tacos.)
+4.  ""We can meet en el parque, like at 5. **Para platicar de lo que te conté.**"" (To talk about what I told you.)
+5.  ""We can meet en el parque, like at 5. **Or maybe you prefer a little later, like a las seis?**""",True
+br_01,BrEng,paraphrase,Put it in the lorry outside the flat.,"Here are a few options, both paraphrased and continued, maintaining that direct, British English style:
+
+**Paraphrases:**
+
+*   ""Chuck it in the wagon just by the gaff."" (More informal/slangy)
+*   ""Stick it in the lorry out front of the flat.""
+*   ""Get it loaded onto the HGV that's parked right outside the flat."" (Slightly more formal, but still UK)
+*   ""Pop it in the removal van that's waiting outside the flat.""
+
+**Continuations:**
+
+*   ""Put it in the lorry outside the flat, and then come back in for the rest of the boxes, pronto.""
+*   ""Put it in the lorry outside the flat, Dave's waiting to take it down to the depot.""
+*   ""Put it in the lorry outside the flat, mind you don't scratch the paintwork on the way out, eh?""
+*   ""Put it in the lorry outside the flat, we haven't got all day, the driver's on a tight schedule.""
+*   ""Put it in the lorry outside the flat, the big one, yeah? Don't leave it on the pavement.""",True
+br_02,BrEng,explain,"Take the lift, not the stairs, to the first floor.","Here are a few options, either paraphrasing or continuing in that British English dialectal style:
+
+**Paraphrases:**
+
+*   ""Use the lift, not the stairs, to reach the first floor.""
+*   ""For the first floor, opt for the lift rather than the stairs.""
+*   ""Give the stairs a miss and take the lift up to the first floor.""
+*   ""The lift will take you to the first floor; best to avoid the staircase.""
+
+**Continuations:**
+
+*   ""...it's much quicker than hoofing it up the steps, especially if you've got heavy bags, mind.""
+*   ""...you'll find it far more convenient than climbing the flight of stairs, and the main office is just through the double doors.""
+*   ""Just press the '1' button, and it'll whisk you right up; the reception desk is immediately to your left.""
+*   ""...the stairs are a bit of a trek, to be honest, and the lift's usually quite prompt.""",True
+br_03,BrEng,continue,"We’re off on holiday next week, fancy it?","Here are a few options, either paraphrasing the original invitation or continuing the conversation in the same style:
+
+**Paraphrases (rephrasing the invitation):**
+
+*   ""We're heading off on a bit of a break next week, fancy coming along?""
+*   ""Hols next week, mate, wanna join us?""
+*   ""We're shooting off for a getaway next week, reckon you'd be up for it?""
+*   ""We're doing a little trip next week, fella, keen to tag along?""
+*   ""We're off for a bit of a jaunt next week, does that tickle your fancy?""
+
+**Continuations (assuming the invite is accepted or needs more info):**
+
+*   ""We’re off on holiday next week, fancy it? It'll be a proper laugh, promise, just need a bit of a break from all this madness.""
+*   ""We’re off on holiday next week, fancy it? We're thinking of heading down to the coast, get a bit of sea air, you know?""
+*   ""We’re off on holiday next week, fancy it? Let us know if you're keen, 'cause we need to sort out the digs soon.""
+*   ""We’re off on holiday next week, fancy it? Could do with a change of scenery, eh? Get away from it all for a bit.""
+*   ""We’re off on holiday next week, fancy it? Just a little mini-break, nothing too fancy, but should be a good shout.""",True
+std_01,StdEng,paraphrase,He is about to head out. Are you coming?,"Given the original text ""He is about to head out. Are you coming?"" is in a very standard, slightly informal English, the ""same dialectal style"" means maintaining that natural, conversational tone without introducing strong regionalisms or overly formal language.
+
+Here are some paraphrases and continuations:
+
+**Paraphrases (rephrasing the original two sentences):**
+
+1.  He's just about to leave. Are you coming along?
+2.  He's getting ready to go. Do you want to join him?
+3.  He's on his way out. Are you coming too?
+4.  He's heading out the door. Are you coming with him?
+5.  He's off now. Fancy coming? (Slightly more British informal)
+
+**Continuations (adding more to the original idea):**
+
+1.  He's about to head out. Are you coming? He said he'd wait for you.
+2.  He's about to head out. Are you coming? We should probably get going.
+3.  He's about to head out. Are you coming? He's just grabbing his keys.
+4.  He's about to head out. Are you coming, or are you staying here?
+5.  He's about to head out. Are you coming? He's waiting by the door.",True
+std_02,StdEng,explain,Please explain this in simple terms.,"Here are several ways to paraphrase or continue that text, maintaining a similar polite, direct, and slightly informal-to-neutral register:
+
+**Paraphrases:**
+
+1.  **""Could you explain this in plain English?""** (Very close, common alternative)
+2.  **""Would you mind breaking this down for me, simply?""** (Slightly more active verb, still polite)
+3.  **""Can you just tell me what it means, without all the fancy words?""** (More direct, slightly more informal)
+4.  **""So, what's the gist of it, in a way I can actually understand?""** (Conversational, focuses on the core idea)
+5.  **""I'm gonna need you to explain that like I'm five.""** (Common idiom, very clear request for extreme simplification)
+6.  **""Could you dumb it down for me a bit?""** (Common idiom, slightly self-deprecating, very clear)
+
+**Continuations:**
+
+1.  ""Please explain this in simple terms, **because I'm completely lost.**"" (Adds a reason)
+2.  ""Please explain this in simple terms, **I'm not following all the technical jargon.**"" (More specific reason)
+3.  ""Please explain this in simple terms; **my brain's not quite grasping the big words.**"" (Slightly more colloquial)
+4.  ""Please explain this in simple terms, **so I can actually get my head around it.**"" (Focuses on understanding)
+5.  ""Please explain this in simple terms, **what's the bottom line here?**"" (Asks for the core conclusion)",True
+std_03,StdEng,continue,We should wrap this up and send it.,"The original phrase ""We should wrap this up and send it"" is already quite common and informal, so the ""dialectal style"" is more about maintaining a practical, slightly colloquial tone rather than a specific regional accent.
+
+Here are some options, either paraphrasing or continuing in that same vein:
+
+**Paraphrases (maintaining the same practical, slightly informal tone):**
+
+*   ""Let's get this wrapped up and sent out.""
+*   ""We should finalize this and get it dispatched.""
+*   ""Time to finish this off and send it on its way.""
+*   ""Let's just put a bow on this and ship it.""
+*   ""We need to get this squared away and out the door.""
+
+**Continuations (extending the thought in the same style):**
+
+*   ""We should wrap this up and send it, so we can move on to the next task.""
+*   ""We should wrap this up and send it; it's been sitting here long enough.""
+*   ""We should wrap this up and send it, and then we can call it a day.""
+*   ""We should wrap this up and send it before the end of the day.""
+*   ""We should wrap this up and send it, so it gets there on time.""",True

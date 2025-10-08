@@ -21,37 +21,38 @@ wheels/
 *.egg
 MANIFEST
 
-# Virtual environments
-.venv/
+# Virtual Environment
+.env
+.venv
+env/
 venv/
 ENV/
-env/
-.env
+env.bak/
+venv.bak/
 
-# Jupyter Notebook
-.ipynb_checkpoints/
-
-# Data files
-*.csv
-*.json
-*.pkl
-*.pickle
-
-# IDE
+# IDEs
 .vscode/
 .idea/
 *.swp
 *.swo
+*~
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# Data files (keep structure but ignore large data)
+data/aggregated_results.json
+
+# Logs
+*.log
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
-logs/
-
-# API keys and secrets
+# Environment variables (API keys should never be committed)
+.env
 .env.local
-.env.production
-secrets.json
+.env.*.local

@@ -1,0 +1,94 @@
+id,variety,task,input_text,output_text,success
+aave_01,AAVE,paraphrase,He finna go to the store. You sliding?,"Here are a few ways to keep it in the same dialectal style (AAVE/slang):
+
+1. **""He ‘bout to hit up the spot. You ridin’ or what?""**
+2. **""He on his way to the store right quick. You comin’ thru?""**
+3. **""Bruh finna make a run. You tryna tag along?""**
+4. **""He ‘bout to dip to the store—you down or nah?""**
+5. **""He pullin’ up to the market soon. You hoppin’ in or stayin’ back?""**",True
+aave_02,AAVE,explain,Ion think that plan gon’ work.,"Here’s a few ways to keep it in the same dialectal style:
+
+1. **""Nah, that ain’t finna slide—trust me.""**
+2. **""Man, that shit sound like a L right there.""**
+3. **""Ain’t no way that’s gon’ pan out how you thinkin’.""**
+4. **""You playin’ yaself if you think that’s the move.""**
+5. **""That plan weaker than decaf—try again.""**",True
+aave_03,AAVE,continue,We was tryna finish that yesterday,"Here’s a few ways to keep it in the same dialectal style:
+
+1. **""We was s’posed to knock that out yesterday, but shit kept poppin’ off.""**
+2. **""Man, we was on that all day—still ain’t get it done, tho.""**
+3. **""We was tryna wrap that up yesterday, but you know how it go.""**
+4. **""Ain’t no way we was finna finish that yesterday—too much goin’ on.""**",True
+span_01,Spanglish,paraphrase,"Vamos later, it’s muy close to la tienda.","Here are a few ways to keep it in the same Spanglish/Chicano dialectal style:
+
+1. **""Dale, mero ahí nomás está la tienda, vamos pa’ ya.""**
+2. **""Órale, está bien cerquita, echémosle un sprint pa’ llegar.""**
+3. **""No manches, está a dos pasos, ¿qué no? Ándale, vámonos.""**
+4. **""Ya casi llegamos, carnal—la tienda está a la vuelta nomás.""**
+
+If you want a continuation in the same vibe:
+*""Vamos later, it’s muy close to la tienda. Ni cinco minutos caminando, y si apuramos el paso, hasta llegamos antes de que cierren. ¿Qué dices? ¿O vas a echarte pa’ atrás como siempre?""*",True
+span_02,Spanglish,explain,"No entiendo bien, pero I think it’s fine.","Here are a few ways to continue or paraphrase in the same Spanglish/dialectal style:
+
+1. **""No sé bien, pero pa’ mí está chido.""**
+2. **""No le agarro del todo, pero me late que sí sirve.""**
+3. **""No le entiendo mucho, pero ni modo—ahí va.""**
+4. **""No me queda claro, pero como dicen, *if it works, it works*.""**
+5. **""No sé ni qué onda, pero *whatever*, no está tan mal.""**",True
+span_03,Spanglish,continue,"We can meet en el parque, like at 5.","Here’s a continuation in the same casual, Spanglish-infused style:
+
+*""Sounds good, mijo—just don’t be arriving all tardy like last time, eh? Trae un café o algo pa’ no morirnos de hambre mientras hablamos. Y si llueve, avísame pa’ moverlo pa’ la taquería de la esquina. Nos vemos a las cinco en punto… o cuando se te antoje, pero no me hagas esperar como tu tía en el Walmart el Black Friday.""*
+
+---
+**Alternative paraphrase** (if you just wanted a rewording of the original line):
+*""Podemos juntarnos en el parque, digamos a las cinco pa’ no hacerla larga.""*
+or
+*""Qué tal si nos vemos en el parque como a las cinco, bien relajado?""*",True
+br_01,BrEng,paraphrase,Put it in the lorry outside the flat.,"Here’s a few ways to keep it in the same rough, no-nonsense dialectal style:
+
+1. **""Chuck it in the back o’ the wagon by the block.""**
+2. **""Stick it in the truck out front, yeah?""**
+3. **""Bung it in the van by the flats—sharpish.""**
+4. **""Slap it in the lorry where it’s parked up, innit.""**
+5. **""Dump it in the motor outside, don’t mess about.""**",True
+br_02,BrEng,explain,"Take the lift, not the stairs, to the first floor.","Here’s a continuation in the same direct, slightly brusque dialectal style:
+
+*""Mind the gap when you step out—door’s got a mind of its own. Straight ahead, past the vending machine (if it’s still workin’), and you’ll see the desk with the sign that says *Reception*—though why they need to tell you that, I’ll never know. Knock if no one’s lookin’ up, but don’t bang like the bill collector’s at the door.""*
+
+Or a paraphrase of your original line:
+*""Skip the stairs, mate—they’re just a waste of good breath. Hit the lift, press ‘1,’ and let the machine do the work for once.""*",True
+br_03,BrEng,continue,"We’re off on holiday next week, fancy it?","Here’s a few ways to keep it in the same casual, chatty dialect:
+
+1. **""We’re jetin’ off next week—up for it, then?""**
+2. **""Holiday time next week, mate—you in or what?""**
+3. **""Headin’ off on our hols next week—sound like a laugh?""**
+4. **""We’re outta here next week—wanna tag along?""**
+5. **""Proper break next week—you game?""**",True
+std_01,StdEng,paraphrase,He is about to head out. Are you coming?,"Here’s a few ways to keep it in the same natural, conversational tone:
+
+1. **""He’s fixin’ to roll—you in or what?""**
+2. **""Dude’s ‘bout to bounce. You ridin’ or nah?""**
+3. **""He’s walkin’ out that door in two seconds. You with me?""**
+4. **""Man’s leavin’—you taggin’ along or just gonna stand there?""**",True
+std_02,StdEng,explain,Please explain this in simple terms.,"Here’s a few ways to keep it in that same plain, no-nonsense style—pick whichever fits best:
+
+---
+**""Break it down for me straight—no fancy talk.""**
+
+---
+**""Say it like I’m five, but don’t sugarcoat it.""**
+
+---
+**""Lay it out plain as day—what’s the bottom line?""**
+
+---
+**""Skip the jargon. What’s this *actually* mean?""**
+
+---
+**""Talk to me like we’re fixin’ a truck, not writin’ a textbook.""** *(if you want a slightly more rural/working-class twist)*",True
+std_03,StdEng,continue,We should wrap this up and send it.,"Here are a few ways to keep it in the same casual, conversational tone:
+
+1. **""Let’s get this packed and shipped out.""**
+2. **""Time to seal it up and get it movin’.""**
+3. **""We oughta finish this off and send it on its way.""**
+4. **""Best to tie it up and send it now.""**",True
