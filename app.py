@@ -25,7 +25,12 @@ import time
 
 # Import our existing adapters
 import sys
-sys.path.append('src')
+import os
+
+# Add src to path for both local and production
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(current_dir, 'src'))
+
 from adapters.gemini_adapter import GeminiAdapter
 from adapters.mistral_adapter import query_mistral
 from adapters.cohere_adapter import query_cohere

@@ -3,7 +3,7 @@ services:
     name: codeswitch-benchmark
     env: python
     buildCommand: "pip install --upgrade pip && pip install -r requirements_web.txt"
-    startCommand: "gunicorn --bind 0.0.0.0:$PORT wsgi:app --workers 1 --threads 2 --timeout 120 --access-logfile - --error-logfile -"
+    startCommand: "gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --threads 2 --timeout 120 --log-file=-"
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.18
