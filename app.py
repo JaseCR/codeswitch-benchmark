@@ -8,10 +8,13 @@ from flask import Flask, render_template, request, jsonify, session
 import os
 import json
 import pandas as pd
+
+# Configure matplotlib before importing pyplot
 import matplotlib
-matplotlib.use('Agg')  # Use non-interactive backend
+matplotlib.use('Agg')  # Use non-interactive backend for server
 import matplotlib.pyplot as plt
 import seaborn as sns
+
 import io
 import base64
 import plotly.graph_objs as go
@@ -35,11 +38,15 @@ RESULTS_FILE = 'data/aggregated_results.json'
 
 def load_aggregated_results():
     """Load aggregated results from file"""
+    # Ensure data directory exists
+    os.makedirs(os.path.dirname(RESULTS_FILE), exist_ok=True)
+    
     if os.path.exists(RESULTS_FILE):
         try:
             with open(RESULTS_FILE, 'r') as f:
                 return json.load(f)
-        except:
+        except Exception as e:
+            print(f"Error loading results: {e}")
             return []
     return []
 
