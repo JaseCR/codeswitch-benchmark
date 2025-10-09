@@ -261,94 +261,109 @@ def generate_summary(results):
 
 def create_visualizations(results):
     """Create beautiful visualizations"""
-    df = pd.DataFrame(results)
-    charts = {}
-    
-    # 1. Model Performance Comparison
-    model_perf = df.groupby('model')['retention_rate'].mean().reset_index()
-    fig1 = go.Figure(data=[
-        go.Bar(
-            x=model_perf['model'],
-            y=model_perf['retention_rate'],
-            marker_color=['#FF6B6B', '#4ECDC4', '#45B7D1'],
-            text=[f"{x:.1%}" for x in model_perf['retention_rate']],
-            textposition='auto'
+    try:
+        df = pd.DataFrame(results)
+        charts = {}
+        
+        # 1. Model Performance Comparison
+        model_perf = df.groupby('model')['retention_rate'].mean().reset_index()
+        fig1 = go.Figure(data=[
+            go.Bar(
+                x=model_perf['model'],
+                y=model_perf['retention_rate'],
+                marker_color=['#FF6B6B', '#4ECDC4', '#45B7D1'],
+                text=[f"{x:.1%}" for x in model_perf['retention_rate']],
+                textposition='auto'
+            )
+        ])
+        fig1.update_layout(
+            title="🎯 Model Performance: Code-Switching Retention",
+            xaxis_title="Model",
+            yaxis_title="Retention Rate",
+            yaxis=dict(tickformat='.0%'),
+            template="plotly_white"
         )
-    ])
-    fig1.update_layout(
-        title="🎯 Model Performance: Code-Switching Retention",
-        xaxis_title="Model",
-        yaxis_title="Retention Rate",
-        yaxis=dict(tickformat='.0%'),
-        template="plotly_white"
-    )
-    charts['model_performance'] = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+        charts['model_performance'] = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
+    except Exception as e:
+        print(f"Error in create_visualizations: {e}")
+        return {}
     
-    # 2. Variety Difficulty Heatmap
-    variety_perf = df.pivot_table(
-        index='variety', 
-        columns='model', 
-        values='retention_rate', 
-        aggfunc='mean'
-    ).fillna(0)
-    
-    fig2 = go.Figure(data=go.Heatmap(
-        z=variety_perf.values,
-        x=variety_perf.columns,
-        y=variety_perf.index,
-        colorscale='RdYlGn',
-        text=[[f"{x:.1%}" for x in row] for row in variety_perf.values],
-        texttemplate="%{text}",
-        textfont={"size": 12}
-    ))
-    fig2.update_layout(
-        title="🌍 Code-Switching Retention by Language Variety",
-        xaxis_title="Model",
-        yaxis_title="Language Variety",
-        template="plotly_white"
-    )
-    charts['variety_heatmap'] = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
-    
-    # 3. Response Length Analysis
-    fig3 = go.Figure()
-    for model in df['model'].unique():
-        model_data = df[df['model'] == model]
-        fig3.add_trace(go.Box(
-            y=model_data['response_length'],
-            name=model.title(),
-            boxpoints='outliers'
+        # 2. Variety Difficulty Heatmap
+        variety_perf = df.pivot_table(
+            index='variety', 
+            columns='model', 
+            values='retention_rate', 
+            aggfunc='mean'
+        ).fillna(0)
+        
+        fig2 = go.Figure(data=go.Heatmap(
+            z=variety_perf.values,
+            x=variety_perf.columns,
+            y=variety_perf.index,
+            colorscale='RdYlGn',
+            text=[[f"{x:.1%}" for x in row] for row in variety_perf.values],
+            texttemplate="%{text}",
+            textfont={"size": 12}
         ))
-    fig3.update_layout(
-        title="📏 Response Length Distribution by Model",
-        xaxis_title="Model",
-        yaxis_title="Response Length (words)",
-        template="plotly_white"
-    )
-    charts['response_length'] = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
-    
-    # 4. Success Rate by Task
-    task_perf = df.groupby(['task', 'model'])['success'].mean().reset_index()
-    fig4 = go.Figure()
-    for model in df['model'].unique():
-        model_data = task_perf[task_perf['model'] == model]
-        fig4.add_trace(go.Bar(
-            x=model_data['task'],
-            y=model_data['success'],
-            name=model.title()
-        ))
-    fig4.update_layout(
-        title="✅ Success Rate by Task Type",
-        xaxis_title="Task Type",
-        yaxis_title="Success Rate",
-        yaxis=dict(tickformat='.0%'),
-        template="plotly_white",
-        barmode='group'
-    )
-    charts['task_success'] = json.dumps(fig4, cls=plotly.utils.PlotlyJSONEncoder)
-    
-    return charts
+        fig2.update_layout(
+            title="🌍 Code-Switching Retention by Language Variety",
+            xaxis_title="Model",
+            yaxis_title="Language Variety",
+            template="plotly_white"
+        )
+        charts['variety_heatmap'] = json.dumps(fig2, cls=plotly.utils.PlotlyJSONEncoder)
+        
+        # 3. Response Length Analysis
+        fig3 = go.Figure()
+        for model in df['model'].unique():
+            model_data = df[df['model'] == model]
+            fig3.add_trace(go.Box(
+                y=model_data['response_length'],
+                name=model.title(),
+                boxpoints='outliers'
+            ))
+        fig3.update_layout(
+            title="📏 Response Length Distribution by Model",
+            xaxis_title="Model",
+            yaxis_title="Response Length (words)",
+            template="plotly_white"
+        )
+        charts['response_length'] = json.dumps(fig3, cls=plotly.utils.PlotlyJSONEncoder)
+        
+        # 4. Success Rate by Task
+        task_perf = df.groupby(['task', 'model'])['success'].mean().reset_index()
+        fig4 = go.Figure()
+        for model in df['model'].unique():
+            model_data = task_perf[task_perf['model'] == model]
+            fig4.add_trace(go.Bar(
+                x=model_data['task'],
+                y=model_data['success'],
+                name=model.title()
+            ))
+        fig4.update_layout(
+            title="✅ Success Rate by Task Type",
+            xaxis_title="Task Type",
+            yaxis_title="Success Rate",
+            yaxis=dict(tickformat='.0%'),
+            template="plotly_white",
+            barmode='group'
+        )
+        charts['task_success'] = json.dumps(fig4, cls=plotly.utils.PlotlyJSONEncoder)
+        
+        return charts
+    except Exception as e:
+        print(f"Error in create_visualizations (complete): {e}")
+        import traceback
+        traceback.print_exc()
+        return {}
+
+# Ensure data directory exists on startup
+try:
+    os.makedirs('data', exist_ok=True)
+    print("Data directory created/verified")
+except Exception as e:
+    print(f"Warning: Could not create data directory: {e}")
 
 if __name__ == '__main__':
-    import os
     port = int(os.environ.get('PORT', 5001))
     app.run(debug=False, host='0.0.0.0', port=port)
