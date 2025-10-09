@@ -284,10 +284,7 @@ def create_visualizations(results):
             template="plotly_white"
         )
         charts['model_performance'] = json.dumps(fig1, cls=plotly.utils.PlotlyJSONEncoder)
-    except Exception as e:
-        print(f"Error in create_visualizations: {e}")
-        return {}
-    
+        
         # 2. Variety Difficulty Heatmap
         variety_perf = df.pivot_table(
             index='variety', 
